@@ -39,8 +39,6 @@ perspective: 600px;
   background-color: gray;
   transform: rotateY(180deg);
 }
-/* .card__face--front {
-  /* background-color: red; }*/
 #submitButton {
   background-color: red;
 }

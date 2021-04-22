@@ -15,20 +15,26 @@ class Pokemon {
         this.weight = weight
         this.abilities = abilities
         this.moves = moves
-        this.type = types
+        this.types = types
     }
 }
 newButton.addEventListener('click', () => {
     let pokeName = prompt("what is the name of your new pokemon?")
-    let pokeHeight = prompt("what is the height of your new pokemon?")
-    let pokeWeight = prompt("pokemon weight?")
+    // let pokeHeight = prompt("what is the height of your new pokemon?")
+    // let pokeWeight = prompt("pokemon weight?")
+    let pokeAbilities = prompt("what are your pokemon abilities? (use a comma seperated list")
+    let pokeMove = prompt("what is your pokemon's best move?")
+    let abilitiesArray = getAbilitiesArray(pokeAbilities)
     let newPokemon = new Pokemon(
         pokeName,
-        pokeHeight,
-        pokeWeight,
-        ['eat', 'sleep'],
-        ['study', 'game'],
-        [{
+        80,
+        3000,
+        abilitiesArray,
+        [
+            {
+                move: {
+                    name: pokeMove
+                },
             type: {
                 name: 'normal',
             },
@@ -36,6 +42,17 @@ newButton.addEventListener('click', () => {
     )
     populatePokeCard(newPokemon)
 })
+
+function getAbilitiesArray(commaString) {
+    let tempArray = commaStrubg.split(',')
+    return tempArray.map((abilityName) => {
+        return {
+            ability: {
+                name: abilityName
+            }
+        }
+    })
+}
 
 loadButton.addEventListener('click', () => {
     loadPage()
@@ -97,13 +114,17 @@ function populateCardFront(pokemon) {
     let frontImage = document.createElement('img')
     frontImage.src = getImageFileName(pokemon)
 
+    frontImage.addEventListener('error', (err) => {
+        frontImage.src = 'images/pokeball.png'
+    })
+
     let pokeType1 = pokemon.types[0].type.name
     if (pokemon.types.length > 1) {
         let pokeType2 = pokemon.types[1].type.name
-        pokeFront.style.setProperty('background', 
-        `linear-gradient(
+        pokeFront.style.setProperty('background',
+            `linear-gradient(
             ${getPokeTypeColor(pokeType1)}, 
-            ${getPokeTypeColor(pokeType2,)})`,)
+            ${getPokeTypeColor(pokeType2,)})`, )
     } else {
         pokeFront.style.setProperty('background', getPokeTypeColor(pokeType1))
     }
@@ -120,15 +141,32 @@ function populateCardBack(pokemon) {
     backLabel.textContent = `Moves: ${pokemon.moves.length}`
     pokeBack.appendChild(backLabel)
 
+    let typeLabel = document.createElement('h3')
+    typeLabel.textContent = "Types:"
+    pokeBack.appendChild(typeLabel)
+
     pokemon.types.forEach((pokeType) => {
         let backType = document.createElement('p')
-        backType.textContent = `Type: ${pokeType.type.name}`
+        backType.textContent = pokeType.type.name
         pokeBack.appendChild(backType)
     })
+    let abilityLabel = document.createElement('h3')
+    abilityLabel.textContent = "Abilities:"
+    pokeBack.appendChild(abilityLabel)
+
     pokemon.abilities.forEach((pokeAbility) => {
         let backAbility = document.createElement('p')
-        backAbility.textContent = `Ability: ${pokeAbility.ability.name}`
+        backAbility.textContent = pokeAbility.ability.name
         pokeBack.appendChild(backAbility)
+    })
+
+    let statsLabel = document.createElement('h3')
+    pokeBack.appendChild(statsLabel)
+
+    pokemon.stats.forEach((stat) => {
+        let statPara = document.createElement('p')
+        statPara.textContent = `${stat.stat.name} : ${stat.base_stat}`
+        pokeBack.appendChild(statPara)
     })
     return pokeBack
 }
