@@ -38,6 +38,7 @@ perspective: 600px;
 .card__face--back {
   background-color: gray;
   transform: rotateY(180deg);
+  font-size: x-small;
 }
 #submitButton {
   background-color: red;

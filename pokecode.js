@@ -161,6 +161,7 @@ function populateCardBack(pokemon) {
     })
 
     let statsLabel = document.createElement('h3')
+    statsLabel.textContent = "Stats:"
     pokeBack.appendChild(statsLabel)
 
     pokemon.stats.forEach((stat) => {
