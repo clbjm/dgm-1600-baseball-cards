@@ -159,7 +159,15 @@ function populateCardBack(pokemon) {
         backAbility.textContent = pokeAbility.ability.name
         pokeBack.appendChild(backAbility)
     })
+    let itemLabel = document.createElement('h3')
+    itemLabel.textContent = "Items:"
+    pokeBack.appendChild(itemLabel)
 
+    pokemon.held_items.forEach((pokeItem) => {
+        let backItem = document.createElement('p')
+        backItem.textContent = pokeItem.item.name
+        pokeBack.appendChild(backItem)
+    })
     let statsLabel = document.createElement('h3')
     statsLabel.textContent = "Stats:"
     pokeBack.appendChild(statsLabel)
