@@ -8,7 +8,7 @@ const fetchButton = document.querySelector('#fetchSelectedPokemon')
 const newButton = document.querySelector('#newPokemon')
 
 class Pokemon {
-    constructor(name, height, weight, abilities, moves) {
+    constructor(name, height, weight, abilities, moves, types, held_items, stats) {
         this.id = 900
         this.name = name
         this.height = height
@@ -16,6 +16,8 @@ class Pokemon {
         this.abilities = abilities
         this.moves = moves
         this.types = types
+        this.held_items = held_items
+        this.stats = stats
     }
 }
 newButton.addEventListener('click', () => {
@@ -24,21 +26,29 @@ newButton.addEventListener('click', () => {
     // let pokeWeight = prompt("pokemon weight?")
     let pokeAbilities = prompt("what are your pokemon abilities? (use a comma seperated list")
     let pokeMove = prompt("what is your pokemon's best move?")
+    let held_items = prompt("what is your pokemon's held item?")
+    let backType = prompt("what is your pokemon's type?")
     let abilitiesArray = getAbilitiesArray(pokeAbilities)
     let newPokemon = new Pokemon(
         pokeName,
         80,
         3000,
         abilitiesArray,
+        backType,
         [
             {
                 move: {
                     name: pokeMove
-                },
-            type: {
-                name: 'normal',
-            },
-        }, ],
+                }
+            }
+        ],
+        [
+            {
+                items: {
+                    name: held_items
+                }
+            }
+        ],
     )
     populatePokeCard(newPokemon)
 })
