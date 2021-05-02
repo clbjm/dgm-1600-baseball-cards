@@ -36,9 +36,11 @@ perspective: 600px;
   backface-visibility: hidden;
 }
 .card__face--back {
-  background-color: gray;
+  background-color: chartreuse;
   transform: rotateY(180deg);
   font-size: x-small;
+  text-shadow: 0 0 black;
+  text-transform: capitalize;
 }
 #submitButton {
   background-color: red;
