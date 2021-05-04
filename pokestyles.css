@@ -41,6 +41,7 @@ perspective: 600px;
   font-size: x-small;
   text-shadow: 0 0 black;
   text-transform: capitalize;
+  overflow: auto;
 }
 #submitButton {
   background-color: red;
